@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Angular Server TimeZone by sagrawal14</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Angular Server TimeZone</h1>
+      <h2 class="project-tagline">A simple AngularJS extension to pass user&#39;s browser timezone with each $http request</h2>
+      <a href="https://github.com/sagrawal14/angular-server-timezone" class="btn">View on GitHub</a>
+      <a href="https://github.com/sagrawal14/angular-server-timezone/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/sagrawal14/angular-server-timezone/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="angular-server-timezone-current-v001" class="anchor" href="#angular-server-timezone-current-v001" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Angular Server Timezone (current v0.0.1)</h1>
+
+<p>A simple Angular module which will pass the timezone of user's browser to the every <code>$http</code> request. By default, it
+sends the timezone in request header under the key <code>User-Time-Zone</code> (name can be changed) but you can change it to
+pass as request parameter.</p>
+
+<p>This library combines <a href="https://github.com/bower-packages/bower-jstz">bower-jstz</a> for detecting the timezone. (You don't have to include it explicitly).</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a id="1-install-via-bower" class="anchor" href="#1-install-via-bower" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1. Install via Bower</h3>
+
+<div class="highlight highlight-source-shell"><pre>bower install angular-server-timezone --save</pre></div>
+
+<h3>
+<a id="2-add-the-script-to-your-main-html-file-like-indexhtml" class="anchor" href="#2-add-the-script-to-your-main-html-file-like-indexhtml" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. Add the script to your main HTML file (like index.html)</h3>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bower_components/angular-server-timezone/dist/angular-server-timezone.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<h3>
+<a id="3-add-dependency-to-your-application" class="anchor" href="#3-add-dependency-to-your-application" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3. Add dependency to your application</h3>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> myApp <span class="pl-k">=</span> <span class="pl-smi">angular</span>.<span class="pl-en">module</span>(<span class="pl-s"><span class="pl-pds">"</span>foo<span class="pl-pds">"</span></span>, [<span class="pl-s"><span class="pl-pds">"</span>server.timezone<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>other-foo-depenency<span class="pl-pds">"</span></span>]);</pre></div>
+
+<p>Now, in each HTTP request to the server, you can see the user's current timezone is being sent.</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/1804514/15773242/85512776-2993-11e6-8b4f-750b55a90caa.png" alt="angular-server-timezone"></p>
+
+<h3>
+<a id="4-customizations" class="anchor" href="#4-customizations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4. Customizations</h3>
+
+<p>By default, this module send the timezone in header with name <code>User-Time-Zone</code> which can be customized in your app's
+config. Also, you can send the timezone as the request parameter instead of header or both where paramter name can
+also be customized.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">amyApp</span>.<span class="pl-en">config</span>([<span class="pl-s"><span class="pl-pds">'</span>serverTimeZoneConfigProvider<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">serverTimeZoneConfig</span>) {
+
+    <span class="pl-smi">serverTimeZoneConfig</span>.<span class="pl-smi">sendAsHeader</span> <span class="pl-k">=</span> <span class="pl-c1">true</span>;              <span class="pl-c">// Default</span>
+    <span class="pl-smi">serverTimeZoneConfig</span>.<span class="pl-smi">headerName</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>fooTimeZone<span class="pl-pds">'</span></span>;        <span class="pl-c">// Default to User-Time-Zone</span>
+
+    <span class="pl-smi">serverTimeZoneConfig</span>.<span class="pl-smi">sendAsParameter</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>;              <span class="pl-c">// Default</span>
+    <span class="pl-smi">serverTimeZoneConfig</span>.<span class="pl-smi">headerName</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>barTimeZone<span class="pl-pds">'</span></span>;        <span class="pl-c">// Default to userTimeZone</span>
+}]);</pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/sagrawal14/angular-server-timezone">Angular Server TimeZone</a> is maintained by <a href="https://github.com/sagrawal14">sagrawal14</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
