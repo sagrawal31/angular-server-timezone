@@ -6,17 +6,16 @@
  * @ngdoc service
  * @name ncTimeZone
  * @requires $httpProvider
- *
  * @description
- * An Angular module which when included to the main app passes the user's current timezone in every request header
- * done by $http. This module sends timezone in the request header under the key 'User-Time-Zone'
+ * A simple Angular module which when included to the Angular app passes the timezone of user's browser in every
+ * $http request header (by default, can modify it to pass as parameter). This module sends timezone
+ * in the request header under the key 'User-Time-Zone' by default.
  *
  * Including it in your main module:
  * <code>
- *      angular.module('myApp', ['ncTimezone'])
+ *      angular.module('myApp', ['serverTimeZone'])
  * </code>
  */
-
 var userTimeZone = jstz.determine().name();
 
 angular.module('serverTimeZone', [])
@@ -24,12 +23,16 @@ angular.module('serverTimeZone', [])
 
         // Add an HTTP service interceptor
         var interceptor = ['serverTimeZoneConfig', function (serverTimeZoneConfig) {
-            var headerName = serverTimeZoneConfig.headerName;
-
             return {
                 'request': function (config) {
-                    if (config.headers) {
-                        config.headers[headerName] = userTimeZone;
+                    if (serverTimeZoneConfig.sendAsParameter) {
+                        config.params = config.params || {};
+                        config.params[serverTimeZoneConfig.parameterName] = userTimeZone;
+                    }
+
+                    if (serverTimeZoneConfig.sendAsHeader) {
+                        config.headers = config.headers || {};
+                        config.headers[serverTimeZoneConfig.headerName] = userTimeZone;
                     }
 
                     return config;
@@ -41,11 +44,18 @@ angular.module('serverTimeZone', [])
     }])
 
     .provider('serverTimeZoneConfig', function () {
+        this.sendAsHeader = true;
         this.headerName = 'User-Time-Zone';
-        
+
+        this.sendAsParameter = false;
+        this.parameterName = 'userTimeZone';
+
         this.$get = [function () {
             return {
-                headerName: this.headerName
+                sendAsHeader: this.sendAsHeader,
+                headerName: this.headerName,
+                sendAsParameter: this.sendAsParameter,
+                parameterName: this.parameterName
             };
         }];
     });
