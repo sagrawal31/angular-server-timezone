@@ -1,23 +1,25 @@
 {
-    "name": "angular-server-timezone",
-    "description": "A simple AngularJS extension to pass user's browser timezone to each $http request",
-    "main": "src/app.js",
-    "dependencies": {},
-    "devDependencies": {
-        "angular": "^1.5.5"
-    },
-    "authors": [
-        "Shashank Agrawal <shagrawal99@gmail.com>"
-    ],
-    "license": "MIT",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "src"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:sagrawal14/angular-server-timezone.git"
-    }
+  "name": "angular-server-timezone",
+  "description": "A simple AngularJS extension to pass user's browser timezone to each $http request",
+  "main": "src/app.js",
+  "dependencies": {
+    "jstz-detect": "^1.0.5"
+  },
+  "devDependencies": {
+    "angular": "^1.5.5"
+  },
+  "authors": [
+    "Shashank Agrawal <shagrawal99@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sagrawal14/angular-server-timezone.git"
+  }
 }

@@ -13,8 +13,8 @@ module.exports = function (grunt) {
         yeoman: yeomanConfig,
         uglify: {
             build: {
-                src: ['<%=yeoman.src %>/app.js', '<%=yeoman.src %>/**/*.js'],
-                dest: '<%=yeoman.dist %>/bootstrap-angular-validation.min.js'
+                src: ['bower_components/jstz-detect/jstz.min.js', '<%=yeoman.src %>/app.js'],
+                dest: '<%=yeoman.dist %>/angular-server-timezone.min.js'
             }
         },
         bump: {
