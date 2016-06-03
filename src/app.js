@@ -18,7 +18,7 @@
  */
 var userTimeZone = jstz.determine().name();
 
-angular.module('serverTimeZone', [])
+angular.module('server.timezone', [])
     .config(['$httpProvider', function ($httpProvider) {
 
         // Add an HTTP service interceptor
